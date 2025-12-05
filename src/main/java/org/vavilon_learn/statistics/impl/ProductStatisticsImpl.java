@@ -2,18 +2,14 @@ package org.vavilon_learn.statistics.impl;
 
 import org.vavilon_learn.Product;
 import org.vavilon_learn.statistics.ProductStatistics;
-import org.vavilon_learn.utils.JsonFileReader;
-import org.vavilon_learn.utils.impl.JsonFileReaderImpl;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ProductStatisticsImpl implements ProductStatistics {
-    private final JsonFileReader jsonReader = new JsonFileReaderImpl();
     private Map<Long, Product> indexedProducts;
 
-    public ProductStatisticsImpl(List<Product> productInfo) {
-        this.indexedProducts = productInfo.stream().collect(Collectors.toMap(Product::getId, Function.identity()));
+    public ProductStatisticsImpl(Map<Long, Product> productInfo) {
+        this.indexedProducts = productInfo;
     }
 
     @Override
@@ -42,7 +38,7 @@ public class ProductStatisticsImpl implements ProductStatistics {
 
     @Override
     public Optional<Product> findMostSoldInCategory(String category) {
-        if(category == null || category.isBlank()){
+        if (category == null || category.isBlank()) {
             return Optional.empty();
         }
         return indexedProducts.values().stream().filter(p ->
