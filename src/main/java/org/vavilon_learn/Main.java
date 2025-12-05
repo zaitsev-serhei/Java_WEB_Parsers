@@ -59,7 +59,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        //System.out.println(webParser.readPageFromURL(""));
+        System.out.println(webParser.parseWebPageWithTableProductInfo(""));
     }
 
     private static List<Callable<Path>> getCallables(ProductStatistics statistics) {
